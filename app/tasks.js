@@ -1,17 +1,20 @@
-const taskList = [{ name: 'firstTask', date: 'firstDate', id: 0 }, { name: 'secondTask', date: 'secondDate', id: 1 }]
-
+const taskList = [{ name: 'firstTask', date: 'firstDate', id: 0, completedDate: 'notCompleted' }, { name: 'secondTask', date: 'secondDate', id: 1, completedDate : 'notCompleted' }]
 
 exports.getTaskList = taskList
 
-exports.getTaskPosition = name =>
-    taskList.find(task => task.name === +name)
-
-exports.getNewTask = task => {
+exports.addNewTask = task => {
     const name = task
     const id = taskList.length
     const date = new Date().toDateString()
-    const taskObject = { name, date, id }
+    const completedDate = 'notCompleted'
+    const taskObject = { name, date, id, completedDate }
     return taskObject
+}
+
+exports.completeTask = task => {
+  task.completedDate = new Date().toDateString()
+  console.log('Task completed')
+  console.log(taskList)
 }
 
 exports.deleteTask = id => {
@@ -21,6 +24,14 @@ exports.deleteTask = id => {
   console.log(taskList)
 }
 
+exports.allDone = () => {
+taskList.forEach(completeALL)
+}
+
 function renewIndex(el, index) {
 el.id = index
+}
+
+function completeALL(el) {
+  el.completedDate = new Date().toDateString()
 }

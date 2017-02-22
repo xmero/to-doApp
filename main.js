@@ -14,18 +14,13 @@ app.use(bodyParser.json())
 const taskEngine = require('./app/tasks')
 
 var taskList = taskEngine.getTaskList
-const getNewTask = taskEngine.getNewTask
+const addNewTask = taskEngine.addNewTask
 const deleteTask = taskEngine.deleteTask
+const completeTask = taskEngine.completeTask
+const allDone = taskEngine.allDone
 
 
 app.get('/', (req, res) => {
-    res.render('index', { taskList })
-})
-
-app.post('/', (req, res) => {
-    const task = req.body.task
-    taskList.push(getNewTask(task))
-    console.log(taskList)
     res.render('index', { taskList })
 })
 
@@ -33,7 +28,35 @@ app.get('/delete/:id', (req, res) => {
     const idTask = req.params.id
     deleteTask(idTask)
     console.log(taskList)
-    res.render('index', { taskList })
+    res.redirect('/')
+})
+
+app.get('/complete/:id', (req, res) => {
+    const idTask = req.params.id
+    completeTask(taskList[idTask])
+    res.redirect('/')
+})
+
+app.get('/completed', (req, res) => {
+    res.render('completed', { taskList })
+})
+
+app.get('/alldone', (req, res) => {
+    allDone()
+    res.redirect('/')
+})
+
+app.post('/', (req, res) => {
+    let task = req.body.task
+    task = task.replace(/^\s+/, '').replace(/\s+$/, '')
+    if (task === '') {
+        res.redirect('/')
+    } else {
+        taskList.push(addNewTask(task))
+        console.log(taskList)
+        res.redirect('/')
+    }
+
 })
 
 
