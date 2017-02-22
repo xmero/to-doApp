@@ -14,20 +14,28 @@ app.use(bodyParser.json())
 const taskEngine = require('./app/tasks')
 
 var taskList = taskEngine.getTaskList
+const getNewTask = taskEngine.getNewTask
+const deleteTask = taskEngine.deleteTask
 
 
 app.get('/', (req, res) => {
-    res.render('form', { taskList })
+    res.render('index', { taskList })
 })
 
 app.post('/', (req, res) => {
-    const name = req.body.task
-    const date = new Date().toDateString()
-    const newTask = { name, date }
-    taskList.push(newTask)
+    const task = req.body.task
+    taskList.push(getNewTask(task))
     console.log(taskList)
-    res.render('form', { taskList })
+    res.render('index', { taskList })
 })
+
+app.get('/delete/:id', (req, res) => {
+    const idTask = req.params.id
+    deleteTask(idTask)
+    console.log(taskList)
+    res.render('index', { taskList })
+})
+
 
 
 app.listen(PORT, () => console.log(`Listening on PORT ${process.env.PORT}...`))

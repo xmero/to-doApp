@@ -14,5 +14,5 @@ block content
           p #{task.name}
           span Published : #{task.date} 
           | 
-          button(type='submit') delete
+          a(href='/delete/' + task.id) Delete
 
