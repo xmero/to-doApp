@@ -1,0 +1,18 @@
+extends layout.pug
+
+block content
+
+    form(action='/', method='POST')
+      div
+        label 
+        input(type='text', name='task')
+        button(type='submit') addNew Task
+
+    ul.list-group
+      each task in taskList
+        li.list-group-item.task
+          p #{task.name}
+          span Published : #{task.date} 
+          | 
+          button(type='submit') delete
+
