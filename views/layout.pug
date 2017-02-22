@@ -2,12 +2,16 @@ html
   head
     title= addTask
     link(rel='stylesheet', href='/bower_components/bootstrap/dist/css/bootstrap.min.css')
-    link(rel='stylesheet', href='http://bootswatch.com/darkly/bootstrap.min.css')
+    link(rel='stylesheet', href='/stylesheets/styles.css')
   body
-    ul
-      a(href='/') List tasks
-      | 
-      a(href='/completed') Completed
+    .nav-bar
+      ul
+        a(href='/') List tasks
+        | 
+        a(href='/completed') Completed
+    .container
+      h2 ToDo List
+      p Welcome to the Todo app. Enjoy
 
       
 

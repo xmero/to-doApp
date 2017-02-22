@@ -5,14 +5,14 @@ exports.getTaskList = taskList
 exports.addNewTask = task => {
     const name = task
     const id = taskList.length
-    const date = new Date().toDateString()
+    const date = new Date().toString()
     const completedDate = 'notCompleted'
     const taskObject = { name, date, id, completedDate }
     return taskObject
 }
 
 exports.completeTask = task => {
-  task.completedDate = new Date().toDateString()
+  task.completedDate = new Date().toString()
   console.log('Task completed')
   console.log(taskList)
 }
@@ -33,5 +33,7 @@ el.id = index
 }
 
 function completeALL(el) {
-  el.completedDate = new Date().toDateString()
+  if (el.completedDate === 'notCompleted') {  
+  el.completedDate = new Date().toString()
+  }
 }

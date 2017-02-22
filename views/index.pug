@@ -2,23 +2,24 @@ extends layout.pug
 
 block content
 
+  .container
     form(action='/', method='POST')
       div
         label 
-        a(href='/alldone') All done
+        a.done(href='/alldone') All done
         input(type='text', name='task')
-        button(type='submit') addNew Task
+        button.addTask(type='submit') add
 
-
-    ul.list-group
+  .container
+   ul.list
       each task in taskList
-        if task.completedDate == 'notCompleted'
-          li.list-group-item.task
-            a(href='/complete/' + task.id) Completed
-            |
-            span #{task.name} ---
-            span Created : #{task.date} 
-            | 
-            a(href='/delete/' + task.id) Delete
+       if task.completedDate == 'notCompleted'
+          div
+            li.list-group
+              a.done(href='/complete/' + task.id) Completed
+              div
+                p #{task.name}
+                p.date ( Created : #{task.date} ) 
+              a.delete(href='/delete/' + task.id) Delete
 
 
