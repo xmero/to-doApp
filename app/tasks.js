@@ -1,4 +1,6 @@
-const taskList = [{ name: 'firstTask', date: 'firstDate', id: 0, completedDate: 'notCompleted' }, { name: 'secondTask', date: 'secondDate', id: 1, completedDate : 'notCompleted' }]
+
+const taskList = require('./tasks.json')
+// const taskList = [{ name: 'firstTask', date: 'firstDate', id: 0, completedDate: 'notCompleted' }, { name: 'secondTask', date: 'secondDate', id: 1, completedDate : 'notCompleted' }]
 
 exports.getTaskList = taskList
 

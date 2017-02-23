@@ -1,6 +1,10 @@
 const express = require('express')
 const app = express()
 const bodyParser = require('body-parser')
+const fs = require('fs')
+
+var fileName = './app/tasks.json'
+
 
 const PORT = process.env.PORT
 
@@ -34,11 +38,13 @@ app.get('/delete/:id', (req, res) => {
 app.get('/complete/:id', (req, res) => {
     const idTask = req.params.id
     completeTask(taskList[idTask])
+        fs.writeFile(fileName, JSON.stringify(taskList, null, 2), function (err) {
+if (err) return console.log(err)
+})
     res.redirect('/')
 })
 
 app.get('/completed', (req, res) => {
-    console.log(completedList())
     var newList = completedList()
     res.render('completed', { newList })
 })
@@ -55,8 +61,12 @@ app.post('/', (req, res) => {
         res.redirect('/')
     } else {
         taskList.push(addNewTask(task))
+    fs.writeFile(fileName, JSON.stringify(taskList, null, 2), function (err) {
+if (err) return console.log(err)
+})
         res.redirect('/')
     }
+
 
 })
 
