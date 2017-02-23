@@ -29,6 +29,11 @@ exports.deleteTask = id => {
   taskList.forEach(renewIndex)
 }
 
+exports.deleteAllTask = (list) => {
+  list.splice(0)
+  console.log('All elements deleted')
+}
+
 exports.allDone = () => {
 taskList.forEach(completeALL)
 }

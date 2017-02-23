@@ -23,6 +23,7 @@ const deleteTask = taskEngine.deleteTask
 const completeTask = taskEngine.completeTask
 const allDone = taskEngine.allDone
 const completedList = taskEngine.completedList
+const deleteAllTask = taskEngine.deleteAllTask
 
 
 app.get('/', (req, res) => {
@@ -32,6 +33,14 @@ app.get('/', (req, res) => {
 app.get('/delete/:id', (req, res) => {
     const idTask = req.params.id
     deleteTask(idTask)
+    res.redirect('/')
+})
+
+app.get('/deleteall', (req, res) => {
+    deleteAllTask(taskList)
+            fs.writeFile(fileName, JSON.stringify(taskList, null, 2), function (err) {
+if (err) return console.log(err)
+})
     res.redirect('/')
 })
 
