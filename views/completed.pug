@@ -2,9 +2,9 @@ extends layout.pug
 
 block content
     ul.list
-      each task in taskList
-        if task.completedDate !== 'notCompleted'
-          li.list-group
-            span #{task.name} ---
-            span Created : #{task.date} 
-            p.date Completed : #{task.completedDate} 
+      each task in newList
+          li(class="list-tasks")
+            div.task
+              span.crossed #{task.id+1}. #{task.name} 
+              p.date Created : #{task.date} 
+              p.date Completed : #{task.completedDate} 

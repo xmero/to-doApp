@@ -18,6 +18,7 @@ const addNewTask = taskEngine.addNewTask
 const deleteTask = taskEngine.deleteTask
 const completeTask = taskEngine.completeTask
 const allDone = taskEngine.allDone
+const completedList = taskEngine.completedList
 
 
 app.get('/', (req, res) => {
@@ -27,7 +28,6 @@ app.get('/', (req, res) => {
 app.get('/delete/:id', (req, res) => {
     const idTask = req.params.id
     deleteTask(idTask)
-    console.log(taskList)
     res.redirect('/')
 })
 
@@ -38,7 +38,9 @@ app.get('/complete/:id', (req, res) => {
 })
 
 app.get('/completed', (req, res) => {
-    res.render('completed', { taskList })
+    console.log(completedList())
+    var newList = completedList()
+    res.render('completed', { newList })
 })
 
 app.get('/alldone', (req, res) => {
@@ -53,7 +55,6 @@ app.post('/', (req, res) => {
         res.redirect('/')
     } else {
         taskList.push(addNewTask(task))
-        console.log(taskList)
         res.redirect('/')
     }
 

@@ -4,22 +4,24 @@ block content
 
   .container
     form(action='/', method='POST')
-      div
+      div.main-form
         label 
-        a.done(href='/alldone') All done
+        a(href='/alldone' class="button done") All done
         input(type='text', name='task')
-        button.addTask(type='submit') add
+        button(type='submit' class="button addTask") add
 
   .container
-   ul.list
-      each task in taskList
-       if task.completedDate == 'notCompleted'
-          div
-            li.list-group
-              a.done(href='/complete/' + task.id) Completed
+    if (taskList.length !== 0)
+      ul.list
+        each task in taskList
+          if task.completedDate == 'notCompleted'
+            li.list-tasks
+              a(href=('/complete/' + task.id) class="button done") Completed
               div
-                p #{task.name}
+                p(class="task") #{task.id+1}.  #{task.name}
                 p.date ( Created : #{task.date} ) 
-              a.delete(href='/delete/' + task.id) Delete
+              a(href='/delete/' + task.id class="button delete") Delete
+    else
+      p No tasks.
 
 
